@@ -1,0 +1,137 @@
+{% extends 'main_app/layouts/base_template.html' %}
+{% load humanize %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% block content %}
+	{% include 'main_app/partials/header.html' %}
+	<div id="page-content" class="page-content">
+		<div class="banner">
+			<div class="jumbotron jumbotron-bg text-center rounded-0"
+			     style="background-image: url('{% static 'app/img/bg-header.jpg' %}');">
+				<div class="container">
+					<h1 class="pt-5">
+						Checkout
+					</h1>
+					<p class="lead">
+						Save time and leave the groceries to us.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<section id="checkout">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-7">
+						<h5 class="mb-3">BILLING DETAILS</h5>
+						<p class="font-italic font-weight-bold">*Kindly Fill in your address details in the settings
+							page*</p>
+						<!-- Bill Detail of the Page -->
+						<form action="#" class="bill-detail">
+							<fieldset>
+								<div class="form-group row">
+									<div class="col">
+										<input class="form-control" placeholder="Name" type="text"
+										       value="{{ user.first_name }}">
+									</div>
+									<div class="col">
+										<input class="form-control" placeholder="Last Name" type="text"
+										       value="{{ user.last_name }}">
+									</div>
+								</div>
+								<div class="form-group">
+									<textarea class="form-control" placeholder="Address">{{ full_address }}</textarea>
+								</div>
+								<div class="form-group">
+									<input class="form-control" placeholder="Town / City" type="text"
+									       value="{{ address.town }}">
+								</div>
+								<div class="form-group">
+									<input class="form-control" placeholder="State / Country" type="text"
+									       value="{{ address.city }}">
+								</div>
+								<div class="form-group">
+									<input class="form-control" placeholder="Postcode / Zip" type="text"
+									       value="{{ address.postal_code }}">
+								</div>
+								<div class="form-group row">
+									<div class="col">
+										<input class="form-control" placeholder="Email Address" type="email"
+										       value="{{ user.email }}">
+									</div>
+									<div class="col">
+										<input class="form-control" placeholder="Phone Number" type="tel"
+										       value="{{ phone_no }}">
+									</div>
+								</div>
+							</fieldset>
+						</form>
+						<!-- Bill Detail of the Page end -->
+					</div>
+					<div class="col-xs-12 col-sm-5">
+						<div class="holder">
+							<h5 class="mb-3">YOUR ORDER</h5>
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+									<tr>
+										<th>Products</th>
+										<th class="text-right">Subtotal</th>
+									</tr>
+									</thead>
+									<tbody>
+									{% for item in cart_items %}
+										<tr>
+											<td>
+												{{ item.product.name }} x{{ item.quantity }}
+											</td>
+											<td class="text-right">
+												Ksh. {{ item.product.price | intcomma }}
+											</td>
+										</tr>
+									{% endfor %}
+									</tbody>
+									<tfooter>
+										<tr>
+											<td>
+												<strong>Cart Subtotal</strong>
+											</td>
+											<td class="text-right">
+												Ksh. {{ total_item_cost | intcomma }}
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<strong>Shipping</strong>
+											</td>
+											<td class="text-right">
+												Ksh. {{ shipping_fee | intcomma }}.00
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<strong>ORDER TOTAL</strong>
+											</td>
+											<td class="text-right">
+												<strong>Ksh. {{ total | intcomma }}</strong>
+											</td>
+										</tr>
+									</tfooter>
+								</table>
+							</div>
+						</div>
+						{% if total > 200 %}
+							<form action="{% url 'checkout' %}" method="post">
+								{% csrf_token %}
+								<button type="submit" class="btn btn-primary">Complete Order</button>
+							</form>
+						{% else %}
+							<button type="submit" class="btn btn-primary opacity-50 disabled">Complete Order</button>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	{% include 'main_app/partials/footer.html' %}
+{% endblock %}

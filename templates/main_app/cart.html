@@ -1,0 +1,82 @@
+{% extends 'main_app/layouts/base_template.html' %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+	{% include 'main_app/partials/header.html' %}
+    <div id="page-content" class="page-content">
+        <div class="banner">
+            <div class="jumbotron jumbotron-bg text-center rounded-0" style="background-image: url('{% static 'app/img/bg-header.jpg' %}');">
+                <div class="container">
+                    <h1 class="pt-5">
+                        Your Cart
+                    </h1>
+                    <p class="lead">
+                        Save time and leave the groceries to us.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <section id="cart">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th width="10%"></th>
+                                        <th>Products</th>
+                                        <th>Price</th>
+                                        <th width="15%">Quantity</th>
+                                        <th>Subtotal</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for cart_item in cart_items %}
+                                	 <tr>
+                                        <td>
+                                            <img src="{{ cart_item.product.image.url }}" width="60">
+                                        </td>
+                                        <td>
+                                            {{ cart_item.product.name }}<br>
+                                            <small>1000g</small>
+                                        </td>
+                                        <td>
+	                                        Ksh. {{ cart_item.product.price }}
+                                        </td>
+                                        <td>
+                                            <input class="vertical-spin" type="text" data-bts-button-down-class="btn btn-primary" data-bts-button-up-class="btn btn-primary" value="{{ cart_item.quantity }}" name="vertical-spin">
+                                        </td>
+                                        <td>
+	                                        Ksh. {{ cart_item.product.price }}
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'delete_from_cart' cart_item.id %}" class="text-danger"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <a href="{% url 'shop' %}" class="btn btn-default">Continue Shopping</a>
+                    </div>
+                    <div class="col text-right">
+                        <div class="clearfix"></div>
+                        <h6 class="mt-3">Total: Ksh. {{ total_price | intcomma}}</h6>
+	                    {% if cart_items.count > 0 %}
+		                     <a href="{% url 'checkout' %}" class="btn btn-lg btn-primary">Checkout <i class="fa fa-long-arrow-right"></i></a>
+	                    {% else %}
+		                     <a href="{% url 'checkout' %}" class="btn btn-lg btn-primary disabled">Checkout <i class="fa fa-long-arrow-right"></i></a>
+	                    {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    {% include 'main_app/partials/footer.html' %}
+{% endblock %}

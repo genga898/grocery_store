@@ -1,0 +1,10 @@
+{% extends 'main_app/layouts/base_template.html' %}
+{% block content %}
+	<div class="container-fluid vh-100 d-flex align-items-center justify-content-center">
+		<div class="text-center">
+			<h1 class="text-black-50" style="font-size: 300px;">404</h1>
+			<p style="font-size: 30px">Page Not Found</p>
+			<a href="{% url 'home' %}" class="btn btn-dark">Home</a>
+		</div>
+	</div>
+{% endblock %}

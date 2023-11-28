@@ -1,0 +1,178 @@
+{% extends 'main_app/layouts/base_template.html' %}
+{% load static %}
+{% block content %}
+	{% include 'main_app/partials/header.html' %}
+	<div id="page-content" class="page-content">
+		<div class="banner">
+			<div class="jumbotron jumbotron-bg text-center rounded-0"
+			     style="background-image: url('{% static 'app/img/bg-header.jpg' %}');">
+				<div class="container">
+					<h1 class="pt-5">
+						Your Transactions
+					</h1>
+					<p class="lead">
+						Save time and leave the groceries to us.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<section id="cart">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+								<tr>
+									<th width="5%"></th>
+									<th>Invoice</th>
+									<th>Date</th>
+									<th>Total</th>
+									<th>Status</th>
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+								{% for order in orders %}
+									<tr>
+										<td>1</td>
+										<td>
+											QABCH6745E
+										</td>
+										<td>
+											2023-11-26
+										</td>
+										<td>
+											Ksh. {{ total }}
+										</td>
+										<td>
+											Delivered
+										</td>
+										<td>
+											<button type="button" class="btn btn-default btn-sm" data-toggle="modal"
+											        data-target="#detailModal">
+												Detail
+											</button>
+										</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+
+						<nav aria-label="Page navigation">
+							<ul class="pagination justify-content-center">
+								<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+								<li class="page-item"><a class="page-link" href="#">1</a></li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item"><a class="page-link" href="#">Next</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Modal -->
+		<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		     aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">No. Pesanan : AL121N8H2XQB47</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-6">
+								<p>
+									<strong>Billing Detail:</strong><br>
+									{{ user.first_name }} {{ user.last_name }}<br>
+									Jl. Petani No. 159, Cibabat<br>
+									Cimahi Utara<br>
+									Kota Cimahi<br>
+									Jawa Barat 40513
+								</p>
+							</div>
+							<div class="col-md-6">
+								<p>
+									<strong>Payment Method:</strong><br>
+									MPESA<br>
+									PAYBILL: 140297<br>
+									TRANSACTION ID.: QABCH6745E
+								</p>
+								<p>
+									<strong>Order Date</strong><br>
+									2023-11-26 18:56 GMT+3
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<p>
+									<strong>Your Order:</strong>
+								</p>
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+										<tr>
+											<th>Products</th>
+											<th class="text-right">Subtotal</th>
+										</tr>
+										</thead>
+										<tbody>
+										{% for ordered_item in ordered_items %}
+											<tr>
+												<td>
+													{{ ordered_item.product.name }} x{{ ordered_item.quantity }}
+												</td>
+												<td class="text-right">
+													Ksh. {{ ordered_item.product.price }}
+												</td>
+											</tr>
+										{% endfor %}
+										</tbody>
+										<tfooter>
+											<tr>
+												<td>
+													<strong>Cart Subtotal</strong>
+												</td>
+												<td class="text-right">
+													Ksh. {{ items_cost }}
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<strong>Shipping</strong>
+												</td>
+												<td class="text-right">
+													Ksh. {{ shipping_fee }}
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<strong>ORDER TOTAL</strong>
+												</td>
+												<td class="text-right">
+													<strong>Ksh. {{ total }}</strong>
+												</td>
+											</tr>
+										</tfooter>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% include 'main_app/partials/footer.html' %}
+{% endblock %}

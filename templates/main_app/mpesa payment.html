@@ -1,0 +1,33 @@
+{% extends 'main_app/layouts/base_template.html' %}
+{% load static %}
+{% block title %}
+	Payment
+{% endblock %}
+{% block content %}
+	{% include 'main_app/partials/header.html' %}
+	<div id="page-content" class="page-content">
+		<div class="banner">
+			<div class="jumbotron jumbotron-bg text-center rounded-0"
+			     style="background-image: url('{% static 'app/img/bg-header.jpg' %}');">
+				<div class="container">
+					<h1 class="pt-5">
+						Order Complete
+					</h1>
+					<p class="lead">
+						Save time and leave the groceries to us.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row justify-content-center m-2">
+				<img src="{% static 'app/media/Animation - 1701010970927 (2).gif' %}" alt="completed order">
+			</div>
+			<div class="text-center">
+				<p class="text-success text-center font-weight-bold h2">Order successful</p>
+				<a href="{% url 'shop' %}" class="btn btn-secondary m-md-2">Continue Shopping</a>
+			</div>
+		</div>
+	</div>
+	{% include 'main_app/partials/footer.html' %}
+{% endblock %}

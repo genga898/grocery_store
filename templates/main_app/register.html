@@ -1,0 +1,71 @@
+{% extends 'main_app/layouts/base_template.html' %}
+{% load static %}
+{% block content %}
+	{% include 'main_app/partials/header.html' %}
+	<div id="page-content" class="page-content">
+		<div class="banner px-0">
+			<div class="jumbotron jumbotron-bg text-center rounded-0"
+			     style="background-image: url('{% static 'app/img/bg-header.jpg' %}');">
+				<div class="container">
+					<h1 class="pt-5">
+						Register Page
+					</h1>
+					<p class="lead">
+						Save time and leave the groceries to us.
+					</p>
+
+					<div class="card card-login mb-5">
+						<div class="card-body">
+							{% include 'main_app/partials/alerts.html' %}
+							<form class="form-horizontal" action="" method="post">
+								{% csrf_token %}
+								<div class="form-group gap-3 row mt-3">
+									<div class="col-md-6">
+										<input class="form-control" type="text" required="" placeholder="First Name" name="firstname">
+									</div>
+									<div class="col-md-6 mt-3 mt-md-0">
+										<input class="form-control" type="text" required="" placeholder="Last Name" name="lastname">
+									</div>
+								</div>
+								<div class="form-group row mt-3">
+									<div class="col-md-12">
+										<input class="form-control" type="email" required="" placeholder="Email" name="email">
+									</div>
+								</div>
+								<div class="form-group row mt-3">
+									<div class="col-md-12">
+										<input class="form-control" type="tel" required="" placeholder="Phone" name="contact">
+									</div>
+								</div>
+								<div class="form-group row mt-3">
+									<div class="col-md-12">
+										<input class="form-control" type="text" required="" placeholder="Username" name="username">
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-md-12">
+										<input class="form-control" type="password" required="" placeholder="Password" name="password">
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-md-12">
+										<input class="form-control" type="password" required=""
+										       placeholder="Confirm Password" name="confirm-password">
+									</div>
+								</div>
+								<div class="form-group row text-center mt-4">
+									<div class="col-md-12">
+										<button type="submit" class="btn btn-primary btn-block text-uppercase">
+											Register
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% include 'main_app/partials/footer.html' %}
+{% endblock %}

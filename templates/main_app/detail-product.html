@@ -1,0 +1,61 @@
+{% extends 'main_app/layouts/base_template.html' %}
+{% load static %}
+{% block content %}
+	{% include 'main_app/partials/header.html' %}
+	<div class="banner">
+		<div class="jumbotron jumbotron-bg text-center rounded-0"
+		     style="background-image: url('{% static 'app/img/bg-header.jpg' %}');">
+			<div class="container">
+				<h1 class="pt-5">
+					{{ product.name }}
+				</h1>
+				<p class="lead">
+					Save time and leave the groceries to us.
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="product-detail mb-2 mb-md-4">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<img alt="product-image" class="rounded" src="{{ product.image.url }}" style="width: 100%;">
+				</div>
+				<div class="col-sm-6">
+					<p>
+						<strong>Details</strong><br>
+						{{ product.details }}
+					</p>
+					<div class="row">
+						<div class="col-sm-6">
+							<p>
+								<strong>Price</strong> (/Pack)<br>
+								<span class="price">{{ product.price }}</span>
+							</p>
+						</div>
+						<div class="col-sm-6 text-right">
+							<p>
+								<span class="stock available">In Stock: {{ product.quantity }}</span>
+							</p>
+						</div>
+					</div>
+					<p class="mb-1">
+						<strong>Quantity</strong>
+					</p>
+					<div class="row">
+						<div class="col-sm-5">
+							<input class="vertical-spin" type="text" data-bts-button-down-class="btn btn-primary"
+							       data-bts-button-up-class="btn btn-primary" value="" name="vertical-spin">
+						</div>
+						<div class="col-sm-6"><span class="pt-1 d-inline-block">Pack (250 gram)</span></div>
+					</div>
+
+					<a href="{% url 'add_to_cart' product.id %}" class="mt-3 btn btn-primary btn-lg">
+						<i class="fa fa-shopping-basket"></i> Add to Cart
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% include 'main_app/partials/footer.html' %}
+{% endblock %}

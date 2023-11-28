@@ -1,0 +1,62 @@
+{% load static %}
+<div class="page-header">
+	<!--=============== Navbar ===============-->
+	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-transparent" id="page-navigation">
+		<div class="container">
+			<!-- Navbar Brand -->
+			<a href="{% url 'home' %}" class="navbar-brand">
+				<img src="{% static 'app/img/logo/logo.png' %}" alt="">
+			</a>
+
+			<!-- Toggle Button -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarcollapse"
+			        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarcollapse">
+				<!-- Navbar Menu -->
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a href="{% url 'shop' %}" class="nav-link">Shop</a>
+					</li>
+					<li class="nav-item d-md-none {% if user.is_authenticated %}d-inline{% else %}d-none {% endif %}">
+						<a href="{% url 'cart' %}" class="nav-link">Cart</a>
+					</li>
+					<li class="nav-item d-md-none dropdown {% if user.is_authenticated %}d-inline{% else %}d-none {% endif %}">
+						<a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button"
+						   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							{{ user.username }}
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="{% url 'transactions' %}">Transactions History</a>
+							<a class="dropdown-item" href="{% url 'settings' %}">Settings</a>
+						</div>
+					</li>
+					<li class="nav-item {% if user.is_authenticated %}d-none{% endif %}">
+						<a href="{% url 'register' %}" class="nav-link">Register</a>
+					</li>
+					<li class="nav-item {% if user.is_authenticated %}d-none{% endif %}">
+						<a href="{% url 'login' %}" class="nav-link">Login</a>
+					</li>
+					<li class="nav-item d-none dropdown order-1 {% if user.is_authenticated %}d-md-inline{% else %}d-md-none {% endif %}">
+						<a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button"
+						   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<div class="avatar-header"><img src="{% static 'app/img/logo/avatar.jpg' %}"></div>
+							{{ user.username }}
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="{% url 'transactions' %}">Transactions History</a>
+							<a class="dropdown-item" href="{% url 'settings' %}">Settings</a>
+							<a href="{% url 'logout' %}"
+							   class="dropdown-item {% if user.is_authenticated %}d-block{% else %}d-none {% endif %}">Logout</a>
+						</div>
+					</li>
+				{% include 'main_app/partials/navbar_cart.html' %}
+				</ul>
+
+			</div>
+
+		</div>
+	</nav>
+</div>

@@ -1,0 +1,42 @@
+{% load humanize %}
+{% load static %}
+<li class="nav-item d-none dropdown order-0 {% if user.is_authenticated %}d-md-inline{% else %}d-md-none {% endif %}">
+	<a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown"
+	   aria-haspopup="true" aria-expanded="false">
+		<i class="fa fa-shopping-basket"></i> <span class="badge badge-primary">{{ cart_items.count }}</span>
+	</a>
+	<div class="dropdown-menu shopping-cart">
+		<ul>
+			<li>
+				<div class="drop-title">Your Cart</div>
+			</li>
+			<li>
+				<div class="shopping-cart-list">
+					{% for cart_item in cart_items %}
+						<div class="media">
+							<img class="d-flex mr-3" src="{{cart_item.product.image.url}}"
+							     width="60">
+							<div class="media-body">
+								<h5><a href="javascript:void(0)">{{ cart_item.product.name }}</a></h5>
+								<p class="price">
+									<span>Ksh. {{ cart_item.product.price }}</span>
+								</p>
+								<p class="text-muted">Qty: {{ cart_item.quantity }}</p>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</li>
+			<li>
+				<div class="drop-title d-flex justify-content-between">
+					<span>Total:</span>
+					<span class="text-primary"><strong>Ksh. {{ total_price | intcomma }}</strong></span>
+				</div>
+			</li>
+			<li class="d-flex justify-content-between pl-3 pr-3 pt-3">
+				<a href="{% url 'cart' %}" class="btn btn-secondary">View Cart</a>
+				<a href="{% url 'checkout' %}" class="btn btn-primary">Checkout</a>
+			</li>
+		</ul>
+	</div>
+</li>

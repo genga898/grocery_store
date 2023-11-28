@@ -1,0 +1,70 @@
+{% extends 'main_app/layouts/base_template.html' %}
+{% load static %}
+{% block content %}
+	{% include 'main_app/partials/header.html' %}
+	<div id="page-content" class="page-content">
+		<div class="banner">
+			<div class="jumbotron jumbotron-bg text-center rounded-0"
+			     style="background-image: url('{% static 'app/img/bg-header.jpg' %}');">
+				<div class="container">
+					<h1 class="pt-5">
+						Shopping Page
+					</h1>
+					<p class="lead">
+						Save time and leave the groceries to us.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row flex-column justify-content-center align-items-center mt-2 mt-md-4">
+				<div class="col-12 col-md-6 text-center">
+					<p class="text-center text-primary font-weight-bold font-monospace">Filters</p>
+					<div class="btn-group" role="group" aria-label="Basic example">
+						<a href="" class="btn btn-primary icon-link-hover">Vegetables</a>
+						<a href="" class="btn btn-primary">Fruits</a>
+						<a href="" class="btn btn-primary">Meats</a>
+						<a href="" class="btn btn-primary">Fishes</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<section id="products">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h2 class="title">Products</h2>
+						<div class="item col-md-12 d-flex flex-column flex-md-row flex-wrap">
+							{% for product in products %}
+								{% if product.quantity > 0 %}
+									<div class="col-md-4 mb-2 mb-md-4">
+										<div class="card card-product">
+											<div class="card-badge">
+												<img src="{{ product.image.url }}" alt="Card image" class="card-img-top">
+											</div>
+											<div class="card-body">
+												<h4 class="card-title">
+													<a href="{% url 'product-details' product.id %}">{{ product.name }}</a>
+												</h4>
+												<div class="card-price">
+													<span class="reguler">Ksh. {{ product.price }}</span>
+												</div>
+												<a href="" class="btn btn-block btn-primary">
+													Add to Cart
+												</a>
+
+											</div>
+										</div>
+									</div>
+								{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	{% include 'main_app/partials/footer.html' %}
+{% endblock %}

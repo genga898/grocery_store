@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>{% block title %}
+		Freshcery | Groceries Organic Store
+	{% endblock %}</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+	      type="text/css">
+	<link href="{% static 'app/fonts/sb-bistro/sb-bistro.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'app/fonts/font-awesome/font-awesome.css' %}" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" type="text/css" media="all" href="{% static 'app/packages/bootstrap/bootstrap.css' %}">
+	<link rel="stylesheet" type="text/css" media="all" href="{% static 'app/packages/o2system-ui/o2system-ui.css' %}">
+	<link rel="stylesheet" type="text/css" media="all" href="{% static 'app/packages/owl-carousel/owl-carousel.css' %}">
+	<link rel="stylesheet" type="text/css" media="all" href="{% static 'app/packages/cloudzoom/cloudzoom.css' %}">
+	<link rel="stylesheet" type="text/css" media="all" href="{% static 'app/packages/thumbelina/thumbelina.css' %}">
+	<link rel="stylesheet" type="text/css" media="all"
+	      href="{% static 'app/packages/bootstrap-touchspin/bootstrap-touchspin.css' %}">
+	<link rel="stylesheet" type="text/css" media="all" href="{% static 'app/css/theme.css' %}">
+
+</head>
+<body>
+{% block content %}
+
+{% endblock %}
+<script type="text/javascript" src="{% static 'app/js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/js/jquery-migrate.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/packages/bootstrap/libraries/popper.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/packages/bootstrap/bootstrap.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/packages/o2system-ui/o2system-ui.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/packages/owl-carousel/owl-carousel.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/packages/cloudzoom/cloudzoom.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/packages/thumbelina/thumbelina.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/packages/bootstrap-touchspin/bootstrap-touchspin.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/js/theme.js' %}"></script>
+</body>
+</html>
